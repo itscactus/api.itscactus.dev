@@ -1,0 +1,18 @@
+[
+    { "code": "§0", "hexCode": "#000000" },
+    { "code": "§1", "hexCode": "#0000AA" },
+    { "code": "§2", "hexCode": "#00AA00" },
+    { "code": "§3", "hexCode": "#00AAAA" },
+    { "code": "§4", "hexCode": "#AA0000" },
+    { "code": "§5", "hexCode": "#AA00AA" },
+    { "code": "§6", "hexCode": "#FFAA00" },
+    { "code": "§7", "hexCode": "#AAAAAA" },
+    { "code": "§8", "hexCode": "#555555" },
+    { "code": "§9", "hexCode": "#5555FF" },
+    { "code": "§a", "hexCode": "#55FF55" },
+    { "code": "§b", "hexCode": "#55FFFF" },
+    { "code": "§c", "hexCode": "#FF5555" },
+    { "code": "§d", "hexCode": "#FF55FF" },
+    { "code": "§e", "hexCode": "#FFFF55" },
+    { "code": "§f", "hexCode": "#FFFFFF" }
+]

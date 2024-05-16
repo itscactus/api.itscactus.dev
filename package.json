@@ -1,0 +1,23 @@
+{
+  "name": "api.itscactus.dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "cactusdev"
+  ],
+  "author": "cactusdev",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/static": "^7.0.4",
+    "@fastify/view": "^9.1.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "fastify": "^4.27.0",
+    "minecraft-server-util": "^5.4.4",
+    "path": "^0.12.7"
+  }
+}

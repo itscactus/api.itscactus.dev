@@ -1,0 +1,68 @@
+<head>
+    <meta property="og:image" content="">
+</head>
+<canvas id="motd" height="88px" width="642">
+
+</canvas>
+
+<script>
+    let canvas = document.getElementById('motd');
+    let ctx = canvas.getContext('2d');
+    
+    var bg = new Image();
+    bg.src = '/assets/motd_bg.png';
+    var favicon = new Image();
+    favicon.src = '<%= `${favicon}` %>';
+    let motd_raw = `<%= motd?.raw || 'No Motd' %>`;
+    ctx.save()
+    bg.addEventListener('load', function() {
+        const ptrn = ctx.createPattern(bg, 'repeat');
+        ctx.fillStyle = ptrn;
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.drawImage(favicon, 10, 10, 64, 64); 
+        ctx.restore()
+        ctx.font = "17px Arial";
+        ctx.fillStyle = 'white'
+        ctx.fillText(`<%= ip || 'Sunucu IP verilmedi' %>`, 100, 20);
+        let lastColor = '#FFFFFF'; // Başlangıçta beyaz renk
+        const splitMotd = motd_raw.split('\n');
+
+        splitMotd.forEach((line, i) => {
+            const words = line.replace(/&amp;/g, '&').split(' ');
+            let x = 78;
+            let y = 88/1.8 + i * 14;
+            words.forEach(word => {
+                const colorCode = word.match(/^§[0-9a-f]/i); // Renk kodunu bul
+                if (colorCode) {
+                    switch (colorCode[0]) {
+                        case '§0': lastColor = '#000000'; break;
+                        case '§1': lastColor = '#0000AA'; break;
+                        case '§2': lastColor = '#00AA00'; break;
+                        case '§3': lastColor = '#00AAAA'; break;
+                        case '§4': lastColor = '#AA0000'; break;
+                        case '§5': lastColor = '#AA00AA'; break;
+                        case '§6': lastColor = '#FFAA00'; break;
+                        case '§7': lastColor = '#AAAAAA'; break;
+                        case '§8': lastColor = '#555555'; break;
+                        case '§9': lastColor = '#5555FF'; break;
+                        case '§a': lastColor = '#55FF55'; break;
+                        case '§b': lastColor = '#55FFFF'; break;
+                        case '§c': lastColor = '#FF5555'; break;
+                        case '§d': lastColor = '#FF55FF'; break;
+                        case '§e': lastColor = '#FFFF55'; break;
+                        case '§f': lastColor = '#FFFFFF'; break;
+                    }
+                }
+                ctx.fillStyle = lastColor; // Son kullanılan rengi ayarla
+                ctx.fillText(word.replace(/§[0-9a-f]/ig, ''), x, y); // Renk kodlarını temizle ve kelimeyi çiz
+                x += ctx.measureText(word + ' ').width; // Bir sonraki kelimenin x pozisyonunu güncelle
+            });
+            
+        });
+        var imgURL = canvas.toDataURL();
+        document.querySelector('meta[property="og:image"]').setAttribute('content', imgURL);
+    })
+
+    
+
+</script>
